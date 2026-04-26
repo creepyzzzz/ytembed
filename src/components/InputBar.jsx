@@ -35,8 +35,11 @@ export default function InputBar({ onLoad }) {
             }}
           />
         </div>
-        <button type="submit" className="load-btn" id="load-stream-btn">
-          Load Stream
+        <button type="submit" className="load-btn" id="load-stream-btn" aria-label="Load Stream">
+          <span className="load-btn__text">Load Stream</span>
+          <svg className="load-btn__icon" viewBox="0 0 24 24">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
         </button>
       </form>
     </section>

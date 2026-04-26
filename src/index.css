@@ -791,11 +791,6 @@ body {
 }
 
 /* ===== Input Section ===== */
-.input-section {
-  width: 100%;
-  max-width: 860px;
-  margin-top: 32px;
-}
 
 .input-wrapper {
   display: flex;
@@ -865,7 +860,7 @@ body {
 }
 
 .load-btn {
-  padding: 16px 32px;
+  padding: 16px 28px;
   background: linear-gradient(135deg, var(--accent) 0%, #6d28d9 100%);
   color: white;
   border: none;
@@ -879,6 +874,17 @@ body {
   transition: all var(--transition-medium);
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.load-btn__icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  display: none; /* hidden on desktop */
 }
 
 .load-btn::before {
@@ -941,7 +947,11 @@ body {
 
 /* ===== Main Content Layout ===== */
 .main-content {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  grid-template-areas: 
+    "player chat"
+    "input chat";
   width: 100%;
   max-width: 1400px;
   gap: 24px;
@@ -952,18 +962,32 @@ body {
 
 .main-content--centered {
   max-width: 950px;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+    "player"
+    "input";
 }
 
 .player-section {
-  flex: 1;
+  grid-area: player;
+  width: 100%;
   min-width: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.input-section {
+  grid-area: input;
+  width: 100%;
+  max-width: 860px;
+  justify-self: center;
+  margin-top: 8px; /* Small additional spacing from video info */
+}
+
 /* ===== Chat Section ===== */
 .chat-section {
+  grid-area: chat;
   width: 380px;
   height: calc(100vh - 180px);
   min-height: 600px;
@@ -973,7 +997,6 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
 }
 
 .chat-header {
@@ -991,6 +1014,11 @@ body {
   color: var(--text-primary);
 }
 
+.chat-header__actions {
+  display: flex;
+  gap: 8px;
+}
+
 .chat-iframe {
   flex: 1;
   width: 100%;
@@ -1000,6 +1028,7 @@ body {
 /* ===== Responsive ===== */
 @media (max-width: 1100px) {
   .main-content {
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
@@ -1017,6 +1046,7 @@ body {
 
   .player-section {
     width: 100%;
+    order: 1;
   }
 
   .chat-section {
@@ -1025,6 +1055,14 @@ body {
     height: 500px;
     min-height: 400px;
     margin-top: 8px;
+    order: 2; /* Chat appears after video player */
+  }
+
+  .input-section {
+    width: 100%;
+    max-width: 100%;
+    order: 3; /* Input bar moves to the bottom */
+    margin-top: 10px;
   }
 }
 
@@ -1107,13 +1145,25 @@ body {
   }
 
   .input-wrapper {
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: row; /* Keep on one line for "chat" feel */
+    gap: 8px;
   }
 
   .load-btn {
-    width: 100%;
-    padding: 14px;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .load-btn__text {
+    display: none;
+  }
+
+  .load-btn__icon {
+    display: block;
+    margin-left: 2px;
   }
 
   .video-info {
