@@ -998,41 +998,133 @@ body {
 }
 
 /* ===== Responsive ===== */
+@media (max-width: 1100px) {
+  .main-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .main-content--centered,
+  .status-bar--centered {
+    max-width: 100%;
+  }
+
+  .status-bar {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .player-section {
+    width: 100%;
+  }
+
+  .chat-section {
+    width: 100%;
+    max-width: 100%;
+    height: 500px;
+    min-height: 400px;
+    margin-top: 8px;
+  }
+}
+
 @media (max-width: 640px) {
   .app {
-    padding: 24px 16px 40px;
+    padding: 24px 12px 40px;
   }
 
   .header__title {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
   }
 
   .header__subtitle {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  /* Compact Player Controls for Mobile */
+  .video-overlay__bottom {
+    padding: 0 12px 8px; /* Reduced bottom padding to move everything down */
+  }
+
+  .progress-row {
+    gap: 10px;
+    margin-bottom: 4px; /* Reduced margin to bring progress bar closer to icons */
+  }
+
+  .live-sync-btn {
+    padding: 4px 10px;
+    font-size: 0.65rem;
+  }
+
+  .controls {
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .controls__left, .controls__right {
+    gap: 2px;
+  }
+
+  .ctrl-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .ctrl-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .controls__time {
+    font-size: 0.7rem;
+    margin-left: 4px;
+  }
+
+  .volume-group {
+    display: none;
+  }
+
+  .big-play-btn {
+    width: 60px;
+    height: 60px;
+  }
+
+  .big-play-btn svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .settings-menu {
+    right: 12px;
+    bottom: 70px;
+    min-width: 200px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .settings-menu__item {
+    padding: 12px 16px;
+    font-size: 0.85rem;
   }
 
   .input-wrapper {
     flex-direction: column;
+    gap: 10px;
   }
 
   .load-btn {
     width: 100%;
-  }
-
-  .controls__time {
-    font-size: 0.75rem;
-  }
-
-  .volume-group {
-    display: none; /* Mobile users use hardware volume buttons */
-  }
-
-  .ctrl-btn {
-    width: 44px;
-    height: 44px; /* Larger touch targets for mobile */
+    padding: 14px;
   }
 
   .video-info {
-    padding: 16px 16px 20px;
+    padding: 16px 12px;
+  }
+
+  .video-info__title {
+    font-size: 1.15rem;
+  }
+
+  .video-info__meta {
+    font-size: 0.75rem;
   }
 }

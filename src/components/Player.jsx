@@ -202,14 +202,38 @@ export default function Player({
   // Handle Fullscreen Screen Rotation
   useEffect(() => {
     const handleFullscreenChange = () => {
-      if (document.fullscreenElement) {
-        try { window.screen.orientation.lock('landscape').catch(() => {}) } catch(e) {}
+      const isFullscreen = !!(
+        document.fullscreenElement || 
+        document.webkitFullscreenElement || 
+        document.mozFullScreenElement || 
+        document.msFullscreenElement
+      );
+
+      if (isFullscreen) {
+        // Try to lock orientation to landscape
+        if (window.screen && window.screen.orientation && window.screen.orientation.lock) {
+          window.screen.orientation.lock('landscape').catch((err) => {
+            console.warn('Orientation lock failed:', err);
+          });
+        } else if (window.screen.lockOrientation) {
+          window.screen.lockOrientation('landscape');
+        }
       } else {
-        try { window.screen.orientation.unlock() } catch(e) {}
+        // Unlock orientation
+        if (window.screen && window.screen.orientation && window.screen.orientation.unlock) {
+          window.screen.orientation.unlock();
+        } else if (window.screen.unlockOrientation) {
+          window.screen.unlockOrientation();
+        }
       }
     };
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+
+    const events = ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'msfullscreenchange'];
+    events.forEach(event => document.addEventListener(event, handleFullscreenChange));
+    
+    return () => {
+      events.forEach(event => document.removeEventListener(event, handleFullscreenChange));
+    };
   }, []);
 
   const handleScrubStart = useCallback((e) => {
