@@ -46,8 +46,9 @@ export default function App() {
   const isAtLiveEdge = duration > 0 && (duration - currentTime) < 5;
 
   return (
-    <div className="app">
+    <div className="app-container">
       <Header />
+      <main className="app-content">
 
       <div className={`status-bar ${!showChat ? 'status-bar--centered' : ''}`}>
         <div className="status-bar__left">
@@ -67,10 +68,11 @@ export default function App() {
               <button 
                 className="action-btn" 
                 title={showChat ? "Hide Chat" : "Show Chat"}
+                aria-label={showChat ? "Hide Chat" : "Show Chat"}
                 onClick={() => setShowChat(!showChat)}
                 style={{ background: showChat ? 'var(--accent-soft)' : '', color: showChat ? 'var(--accent)' : '' }}
               >
-                <svg viewBox="0 0 24 24">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                 </svg>
               </button>
@@ -99,14 +101,15 @@ export default function App() {
                 <button 
                   className="action-btn" 
                   title="Popout Chat"
+                  aria-label="Popout Chat"
                   onClick={() => window.open(`https://www.youtube.com/live_chat?v=${videoId}`, '_blank', 'width=400,height=600')}
                 >
-                  <svg viewBox="0 0 24 24" style={{ width: 16, height: 16 }}>
+                  <svg viewBox="0 0 24 24" style={{ width: 16, height: 16 }} aria-hidden="true">
                     <path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/>
                   </svg>
                 </button>
-                <button className="action-btn" onClick={() => setShowChat(false)} title="Close Chat">
-                  <svg viewBox="0 0 24 24" style={{ width: 16, height: 16 }}>
+                <button className="action-btn" onClick={() => setShowChat(false)} title="Close Chat" aria-label="Close Chat">
+                  <svg viewBox="0 0 24 24" style={{ width: 16, height: 16 }} aria-hidden="true">
                     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
                   </svg>
                 </button>
@@ -114,6 +117,7 @@ export default function App() {
             </div>
             <iframe 
               className="chat-iframe"
+              title="YouTube Live Chat"
               src={`https://www.youtube.com/live_chat?v=${videoId}&embed_domain=${window.location.hostname}`}
             ></iframe>
           </div>
@@ -121,6 +125,7 @@ export default function App() {
 
         <InputBar onLoad={handleLoadStream} />
       </div>
+    </main>
     </div>
   )
 }

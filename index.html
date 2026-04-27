@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StreamView — Live Stream Tester</title>
     <meta name="description" content="StreamView: Embed and test YouTube Live streams with a custom player UI. Clean, minimal, distraction-free." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- Performance: Preload main fonts -->
+    <link rel="preload" href="/fonts/inter-400.ttf" as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href="/fonts/instrument-serif-regular.ttf" as="font" type="font/ttf" crossorigin />
+
+    <!-- Performance: Preconnect to YouTube for faster player loading -->
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://s.ytimg.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

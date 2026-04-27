@@ -15,6 +15,7 @@ export default function InputBar({ onLoad }) {
     <section className="input-section">
       <form className="input-wrapper" onSubmit={handleSubmit}>
         <div className="input-container">
+          <label htmlFor="stream-url-input" className="sr-only">YouTube URL or video ID</label>
           <input
             id="stream-url-input"
             type="text"

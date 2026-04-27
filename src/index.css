@@ -1,5 +1,45 @@
 /* ===== StreamView Design System ===== */
-/* Light, warm aesthetic inspired by the reference design */
+/* Self-hosted fonts for 100% performance */
+
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/instrument-serif-regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/instrument-serif-italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-400.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/inter-500.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter-600.ttf') format('truetype');
+}
 
 :root {
   /* Backgrounds */
@@ -11,8 +51,8 @@
 
   /* Text */
   --text-primary: #1a1a1a;
-  --text-secondary: #6b6b6b;
-  --text-tertiary: #999999;
+  --text-secondary: #555555;
+  --text-tertiary: #606060;
   --text-on-dark: #f8f8f8;
 
   /* Accent — Vibrant purple to match the background character */
@@ -58,6 +98,18 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background-color: #fcfcfc;
@@ -85,12 +137,19 @@ body {
 }
 
 /* ===== App Layout ===== */
-.app {
+.app-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
   padding: 40px 24px 60px;
+}
+
+.app-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* ===== Header ===== */
@@ -230,7 +289,7 @@ body {
 }
 
 .video-placeholder__text {
-  color: #7e22ce;
+  color: #6b21a8;
   font-size: 0.95rem;
   font-weight: 600;
 }
@@ -322,13 +381,52 @@ body {
   opacity: 1;
 }
 
+.video-overlay__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none; /* Desktop hidden */
+  pointer-events: auto;
+}
+
+.centered-play-pause {
+  width: 72px;
+  height: 72px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.centered-play-pause:active {
+  transform: scale(0.9);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.centered-play-pause svg {
+  width: 32px;
+  height: 32px;
+  fill: currentColor;
+}
+
 .video-overlay__top {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end; /* Mobile settings to right */
   align-items: flex-start;
   padding: 16px 20px;
   background: none;
   pointer-events: auto;
+}
+
+.ctrl-btn--top-settings {
+  display: none; /* Desktop hidden */
 }
 
 .video-overlay__bottom {
@@ -687,7 +785,7 @@ body {
   align-items: center;
   gap: 6px;
   background: rgba(255, 0, 0, 0.15);
-  color: #ff4a4a;
+  color: #d32f2f;
   border: 1px solid rgba(255, 0, 0, 0.3);
   padding: 6px 12px;
   border-radius: 12px;
@@ -1130,6 +1228,25 @@ body {
   .big-play-btn svg {
     width: 36px;
     height: 36px;
+  }
+
+  /* Mobile specific control visibility */
+  .ctrl-btn--play-pause,
+  .ctrl-btn--settings {
+    display: none !important;
+  }
+
+  .video-overlay__center,
+  .ctrl-btn--top-settings {
+    display: flex !important;
+  }
+
+  .video-overlay__top {
+    justify-content: flex-end;
+  }
+
+  .thumbnail-overlay {
+    display: none !important;
   }
 
   .settings-menu {
