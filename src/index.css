@@ -156,6 +156,10 @@ body {
 .header {
   text-align: center;
   margin-bottom: 40px;
+  min-height: 104px; /* Reserves space for title and subtitle to prevent font-swap shifts */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .header__title {
@@ -1038,6 +1042,7 @@ body {
   padding: 0 4px;
   width: 100%;
   max-width: 1400px;
+  min-height: 40px; /* Reserves space for badges to prevent jumps when they appear */
   transition: max-width var(--transition-medium);
 }
 
@@ -1067,7 +1072,7 @@ body {
   max-width: 1400px;
   gap: 24px;
   align-items: flex-start;
-  transition: all var(--transition-medium);
+  transition: max-width var(--transition-medium); /* Only transition max-width, not 'all' to avoid layout jumps on mount */
   margin: 0 auto;
 }
 
