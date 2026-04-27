@@ -949,6 +949,19 @@ body {
   opacity: 0.8;
 }
 
+.border-trail-animation {
+  animation: borderTrailAnim 4s linear infinite;
+}
+
+@keyframes borderTrailAnim {
+  from {
+    offset-distance: 0%;
+  }
+  to {
+    offset-distance: 100%;
+  }
+}
+
 .bg-accent {
   background-color: var(--accent) !important;
 }
